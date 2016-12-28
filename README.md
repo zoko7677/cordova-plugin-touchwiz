@@ -1,7 +1,7 @@
 Cordova Mdevice Mode
 ==================
 
-Cordova plugin to create Cordova application with "kiosk mode" And edit by zoko7677
+Cordova plugin to create Cordova application with "kiosk mode" And edit by zoko7677. 
 App with this plugin can be set as Android launcher.
 If app starts as launcher, it blocks hardware buttons and statusbar,
 so the user cannot close the app until the app request it.
