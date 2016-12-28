@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-touchwiz" version="0.2">
+    
+    <name>Cordova Touchwiz Mode</name>
+    <author>Author Jan Kalina , Edit By zoko7677</author>
+    <description>
+        Cordova plugin to create Cordova application with "Touchwiz Mode".
+        App with this plugin can be set as Android launcher.
+        If app starts as launcher, it will block hardware buttons and statusbar,
+        which would allow escape from application.
+        Escape from app will be possible only by javascript call MdevicePlugin.exitMdevice()
+        or by uninstallation app using adb. (Keeping USB debug allowed recommended.)
+        If applications starts as usual (not as launcher), no restrictions will be applied.
+        
+        Plugin website: https://github.com/honza889/cordova-plugin-kiosk
+        Example app: https://github.com/honza889/cordova-kiosk-demo
+        
+        This plugin is for Android for now. Support of iOS would be useless,
+        becase this feature is builded in iOS as Guided Access.
+    </description>
+    <keywords>cordova, launcher, homescreen, Touchwiz, Touchwiz mode</keywords>
+    
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+    
+    <js-module src="mdevice.js" name="MdevicePlugin">
+        <clobbers target="window.MdevicePlugin" />
+    </js-module>
+    
+    <platform name="android">        
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="MdevicePlugin">
+                <param name="android-package" value="jk.cordova.plugin.mdevice.MdevicePlugin" />
+            </feature>
+        </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            
+            <!-- activity to use as launcher - because Cordova app is failing if started while boot -->
+            <activity android:label="@string/activity_name" android:launchMode="singleTop" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:keepScreenOn="true" android:name="jk.cordova.plugin.mdevice.HomeActivity">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.DEFAULT" /><!-- Handler of app icon (required to be launcher) -->
+                    <category android:name="android.intent.category.HOME" /><!-- Handler of Home button -->
+                </intent-filter>
+            </activity>
+            
+            <!-- inner activity, replacement of MainActivity with buttons blocked -->
+            <activity android:label="Mdevice 4U activity" android:launchMode="singleTop" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:keepScreenOn="true" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|uiMode" android:windowSoftInputMode="adjustResize" android:name="jk.cordova.plugin.mdevice.MdeviceActivity">
+            </activity>
+                        
+        </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+                <uses-permission android:name="android.permission.REORDER_TASKS"/>
+        </config-file>
+        
+        <source-file src="android/HomeActivity.java" target-dir="src/jk/cordova/plugin/mdevice" />
+        <source-file src="android/MdeviceActivity.java" target-dir="src/jk/cordova/plugin/mdevice" />
+        <source-file src="android/MdevicePlugin.java" target-dir="src/jk/cordova/plugin/mdevice" />
+        
+    </platform>
+    
+</plugin>
