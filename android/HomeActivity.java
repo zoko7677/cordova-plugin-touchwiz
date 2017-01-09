@@ -23,16 +23,17 @@ public class HomeActivity extends Activity {
         LinearLayout layout = new LinearLayout(this);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         
-        Button button = new Button(this);
+       /* Button button = new Button(this);
         button.setText("Click or press any key to begin...");
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 HomeActivity.this.startMdeviceActivity();
             }
         });
-        layout.addView(button, params);
+        layout.addView(button, params);        
+        setContentView(layout);*/
         
-        setContentView(layout);
+         HomeActivity.this.startMdeviceActivity();
     }
     
     @Override
