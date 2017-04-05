@@ -49,7 +49,7 @@ public class HomeActivity extends Activity {
     
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        startMdeviceActivity();
+        //startMdeviceActivity();
         return true; // prevent event from being propagated
     }
     
