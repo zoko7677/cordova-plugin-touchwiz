@@ -56,7 +56,7 @@ public class HomeActivity extends Activity {
     // http://www.andreas-schrade.de/2015/02/16/android-tutorial-how-to-create-a-kiosk-mode-in-android/
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
+        /*super.onWindowFocusChanged(hasFocus);
         if(!hasFocus) {
             Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
             sendBroadcast(closeDialog);
@@ -72,7 +72,7 @@ public class HomeActivity extends Activity {
                     sendBroadcast(closeDialog);
                 }
             }, 500); // 0.5 second
-        }
+        }*/
     }
     
     private void startMdeviceActivity() {
